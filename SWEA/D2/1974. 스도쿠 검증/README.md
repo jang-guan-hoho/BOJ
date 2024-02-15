@@ -1,4 +1,4 @@
-# [D2] 스도쿠 검증 - 1974 
+# [D2] 스도쿠 검증(해당 풀이는 힙을 사용하는데 목적이있음) - 1974 
 
 [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5Psz16AYEDFAUq) 
 
