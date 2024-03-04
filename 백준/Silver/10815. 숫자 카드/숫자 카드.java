@@ -37,7 +37,7 @@ public class Main {
 		}
 		System.out.println(sb);
 	}
-
+// 이진탐색
 	static void search(int idx, int st, int ed) {
 		int target = num[idx];
 		if (st > ed) {
