@@ -1,29 +1,20 @@
 import java.util.Scanner;
 
 public class Main {
+	static long memo[][] = new long[200][200];
+	static long bc_memo(int n, int r) {	
+		if (memo[n][r] > 0)
+			return memo[n][r]; 
+		if (n == r || r == 0) 
+			return memo[n][r] = 1;	
+		else 
+			return bc_memo(n - 1, r) + bc_memo(n - 1, r - 1); 
+		}
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		int M = sc.nextInt();
-		if (N == M)
-			System.out.println(1);
-		else if(M==0)
-		{
-			System.out.println(1);
-		}
-		else {
-			int ans = 1;
-			int ams = 1;
-			int sub = N-M;
-			while (N > M) {
-				ans *= N;
-				N--;
-			}
-			while(sub>0) {
-				ams *= sub;
-				sub--;
-			}
-			System.out.println(ans/ams);
-		}
+		int n = sc.nextInt();
+		int r = sc.nextInt();	
+		System.out.println(bc_memo(n, r));
 	}
+
 }
