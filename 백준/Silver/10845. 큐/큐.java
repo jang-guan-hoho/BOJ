@@ -1,65 +1,87 @@
+
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
-import java.util.*;
-
 public class Main {
-	public static void main(String[] args) throws IOException{
+	
+	static int[] que;
+	static int idx=-1;
+	static int start =0;
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-        int N = Integer.parseInt(br.readLine());
-        
-        Deque<Integer> deque = new LinkedList<>();
-        for(int i = 0; i<N; i++) {
-        	StringTokenizer st = new StringTokenizer(br.readLine());
-        	String line = st.nextToken();
-        	if(line.equals("push")) {
-        		deque.add(Integer.parseInt(st.nextToken()));
-        	}else if(line.equals("pop")) {
-        		if(!deque.isEmpty()) {
-            		bw.write(deque.poll()+"");
-            		bw.newLine();
-        		}else {
-        			bw.write("-1");
-            		bw.newLine();
-        		}
-        	}else if(line.equals("size")) {
-        		bw.write(deque.size()+"");
-        		bw.newLine();
-        	}else if(line.equals("empty")) {
-        		if(deque.isEmpty()) {
-        			bw.write("1");
-            		bw.newLine();
-        		}else {
-        			bw.write("0");
-            		bw.newLine();
-        		}
-        	}else if(line.equals("front")) {
-        		if(!deque.isEmpty()) {
-        			bw.write(deque.peekFirst()+"");
-            		bw.newLine();
-        		}else {
-        			bw.write("-1");
-            		bw.newLine();
-        		}
-        	}else if(line.equals("back")) {
-        		if(!deque.isEmpty()) {
-        			bw.write(deque.peekLast()+"");
-            		bw.newLine();
-        		}else {
-        			bw.write("-1");
-            		bw.newLine();
-        		}
-        	}
-        }
-        
-        bw.flush();
-        bw.close();
-        br.close();
-    
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		que = new int[N];
+		for (int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine());
+			switch (st.nextToken()) {
+			case "push": {
+				push(Integer.parseInt(st.nextToken()));
+				break;
+			}
+			case "pop":{
+				System.out.println(pop());
+				break;
+			}
+			case "size":{
+				System.out.println(size());
+				break;
+			}
+			case "empty":{
+				System.out.println(empty());
+				break;
+			}
+			case "front":{
+				System.out.println(front());
+				break;
+			}
+			case "back":{
+				System.out.println(back());
+				break;
+			}
+			}
+		}
 	}
+
+	private static int back() {
+		if(idx>=start) {
+			return que[idx];
+		}else
+			return -1;
+	}
+
+	private static int front() {
+		if(idx>=start)
+			return que[start];
+		else
+			return -1;
+	}
+
+	private static int empty() {
+		if(idx < start) {
+			return 1;
+		}else
+			return 0;
+	}
+
+	private static int size() {
+		if(idx>=start)
+			return idx-start+1;
+		else
+			return 0;
+	}
+
+	private static int pop() {
+		if(start <=idx)
+			return que[start++];
+		else
+			return -1;
+	}
+
+	public static void push(int num) {
+		que[++idx]=num;
+	}
+	
 }
