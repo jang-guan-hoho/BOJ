@@ -49,7 +49,7 @@ public class Main {
         keynumber.put('c', 2<<2);
         keynumber.put('d', 2<<3);
         keynumber.put('e', 2<<4);
-        keynumber.put('f', 2<<5);
+        keynumber.put('f', 2<<5); // 비트 마스킹을해서 중복되는 값을 방지할 수 있다!!!!!!(조합 대신 사용가능)
         
         N = sc.nextInt();
         M = sc.nextInt();
