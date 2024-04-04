@@ -1,28 +1,28 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-	static int[] cnt;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        System.out.println(ccl(N));
+    }
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		cnt = new int[N + 1];
-		System.out.println(cal(N));
-	}
+    static int ccl(int N) {
+        int[] dp = new int[N + 1];
+        dp[1] = 0; // 초기값 설정
 
-	static int cal(int num) {
-		if (cnt[num] == 0&&num>1) {
-			if (num % 6 == 0) {
-				cnt[num] = Math.min(cal(num - 1), Math.min(cal(num / 2), cal(num / 3))) + 1;
-			} else if (num % 3 == 0) {
-				cnt[num] = Math.min(cal(num / 3), cal(num - 1)) + 1;
-			} else if (num % 2 == 0) {
-				cnt[num] = Math.min(cal(num - 1), (cal(num / 2))) + 1;
-			} else {
-				cnt[num] = cal(num - 1) + 1;
-			}
-		}
+        for (int i = 2; i <= N; i++) {
+            dp[i] = dp[i - 1] + 1; // 현재 수에서 1을 빼는 경우
 
-		return cnt[num];
-	}
+            if (i % 2 == 0)
+                dp[i] = Math.min(dp[i], dp[i / 2] + 1); // 2로 나누는 경우
+
+            if (i % 3 == 0)
+                dp[i] = Math.min(dp[i], dp[i / 3] + 1); // 3으로 나누는 경우
+        }
+
+        return dp[N];
+    }
 }
