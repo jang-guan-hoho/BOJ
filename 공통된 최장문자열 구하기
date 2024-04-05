@@ -1,0 +1,43 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
+public class LCS(문제이해를 잘못하고 품) {
+	// 문제를 잘못이해 했지만 목표하던 기능인 두 문장열 속에 공통으로 존재하는 문자열 중 가장긴 문자열을 꺼내는 알고리즘은 완성해서 공부용으로 남긴다
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		String s1 = br.readLine();
+		String s2 = br.readLine();
+
+		String[][] dp = new String[s1.length()][s1.length()];
+		String[] s = new String[s1.length()];
+
+		for (int r = 0; r < s1.length(); r++) {
+			dp[r][r] = Character.toString(s1.charAt(r));
+			s[r] = Character.toString(s1.charAt(r));
+		}
+		for (int r = 0; r < s1.length(); r++) {
+			System.out.println(Arrays.toString(dp[r]));
+		}
+
+		int k = 0;
+		int l = 1;
+		while (k < s1.length()) {
+			for (int i = l; i < s1.length(); i++) {
+				if (dp[k][i-1]!=null&&dp[k][i] == null) {
+					if (s2.contains(dp[k][i - 1] + s[i])) {
+						System.out.println(dp[k][i - 1] + s[i]);
+						dp[k][i] = dp[k][i - 1] + s[i];
+					} else
+						break;
+				}
+			}
+			k++;
+		}
+		for (int r = 0; r < s1.length(); r++) {
+			System.out.println(Arrays.toString(dp[r]));
+		}
+	}
+}
